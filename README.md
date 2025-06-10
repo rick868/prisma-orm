@@ -58,6 +58,10 @@ This command does two important things:
 - Creates a **.env** file at the root of the project which is used for defining the environment variables such as the connection string.
 
 The **.env** comes with a ```DATABASE_URL``` field template allowing you to easily configure your database connection string by only filling in important details like username, password, host, port and database name.
-```DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"```
+```
+DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+```
 
-```DATABASE_URL="postgresql://postgres:1234@localhost:5432/products"```
+```
+DATABASE_URL="postgresql://postgres:1234@localhost:5432/products"
+```
