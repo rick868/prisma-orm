@@ -200,5 +200,10 @@ If it is not already installed, run the command:
 ```
 npm install @prisma/client
 ```
+After we create the client, Prisma gives us a set of APIs to help us perform CRUD operations.
 
+## 
+
+### CRUD Operations - Create
+### Create a single record using ```create()﻿```
 
