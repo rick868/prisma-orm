@@ -206,4 +206,49 @@ After we create the client, Prisma gives us a set of APIs to help us perform CRU
 
 ### CRUD Operations - Create
 ### Create a single record using ```create()﻿```
+```
+import { PrismaClient } from '@prisma/client';
+const client = new PrismaClient();
 
+const createProduct = async () => {
+    const newProduct = await client.product.create({
+        data: {
+            productTitle: "Laptop",
+            productDescription: "an awesome laptop",
+            productCost: 36000,
+            unitsLeft: 10
+        }
+    })
+
+    console.log(newProduct);
+}
+```
+### Create multiple records using ```createMany()```
+```
+import { PrismaClient } from "@prisma/client";
+const client = new PrismaClient();
+
+const createProducts = async () => {
+  const newProduct = await client.product.createMany({
+    data: [
+      {
+        productTitle: "smartphone",
+        productDescription: "a powerful smartphone",
+        productCost: 34000,
+        unitsLeft: 15,
+      },
+      {
+        productTitle: "headphones",
+        productDescription: "awesome headphones",
+        productCost: 3400,
+        unitsLeft: 30,
+      },
+    ],
+  });
+
+  console.log(newProduct);
+};
+
+createProducts();
+```
+```createMany()``` returns an object with count field, the value is the number of objects that have been created, if you want to return the objects themselves, use ```createManyAndReturn()``` method.
