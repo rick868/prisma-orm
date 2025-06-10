@@ -65,3 +65,63 @@ DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=pub
 ```
 DATABASE_URL="postgresql://postgres:1234@localhost:5432/products"
 ```
+
+### Models
+
+Models represent database tables and their relationships in a way that feels intuitive and familiar to developers.
+
+### Key concepts of Prisma Models﻿
+1. **Data Models:** Define the tables and their columns (fields) in your database.
+2. **Field Types:** Specify the data types for each field (e.g., String, Int, Boolean).
+3. **Relations:** Describe how models relate to each other using relation fields.
+4. **Attributes:** Add additional metadata to fields and models using attributes like @id, @default, @relation.
+
+The following schema describes a blogging platform - the data model definition is highlighted:
+```
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  role    Role     @default(USER)
+  posts   Post[]
+  profile Profile?
+}
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
+}
+
+model Post {
+  id         Int        @id @default(autoincrement())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  title      String
+  published  Boolean    @default(false)
+  author     User       @relation(fields: [authorId], references: [id])
+  authorId   Int
+  categories Category[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  posts Post[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+```
