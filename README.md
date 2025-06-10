@@ -164,8 +164,41 @@ The corresponding database looks like this:
 ![UML diagram](assets/blogging-platform.png) 
 ## 
 ### Migrations
+In Prisma, migrations are a way to manage and apply changes to your database in a controlled and consistent way.
+
 Prisma Migrate enables you to:
 - Keep your database schema in sync with your Prisma schema as it evolves and
 - Maintain existing data in your database
+**Prisma Migrate** can be considered a hybrid database schema migration tool, meaning it has both of declarative and imperative elements:
+- Declarative: The data model is described in a declarative way in the Prisma schema. Prisma Migrate generates SQL migration files from that data model.
+- Imperative: All generated SQL migration files are fully customizable. Prisma Migrate hence provides the flexibility of an imperative migration tool by enabling you to modify what and how migrations are executed (and allows you to run custom SQL to e.g. make use of native database feature, perform data migrations, ...).
+
+To run a migration, execute the following command
+```
+npx prisma migrate dev --name MIGRATION-NAME
+```
+This command creates a migration based on changes in the schema.prisma file. The ```--name``` parameter allows you to give a descriptive name to the migration.
+
+For example:
+```
+npx prisma migrate dev --name initial-migration
+```
+### Prisma Client
+The Prisma Client is an auto-generated and type-safe database client that you use to interact with your database in a Node.js or TypeScript application. 
+
+It’s generated based on the models you define in your Prisma schema (schema.prisma) and provides a simple, intuitive, and type-safe API for CRUD operations, filtering, pagination, and more.
+
+To generate a client, we use the command:
+```
+npx prisma generate
+```
+This command reads your schema and generates the Prisma Client inside the node_modules directory.
+
+During migrations, @prisma/client package should be installed automatically to help you in working with prisma client.
+
+If it is not already installed, run the command:
+```
+npm install @prisma/client
+```
 
 
