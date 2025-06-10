@@ -125,4 +125,4 @@ enum Role {
   ADMIN
 }
 ```
-<img src="./assets/blogging-platform">
+<img src="../assets/blogging-platform.png">
