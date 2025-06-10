@@ -125,4 +125,14 @@ enum Role {
   ADMIN
 }
 ```
-<img src="../assets/blogging-platform.png">
+
+The data model definition is made up of:
+
+- Models (model primitives) that define a number of fields, including relations between models
+- Enums (enum primitives) (if your connector supports Enums)
+- Attributes and functions that change the behavior of fields and models
+
+The corresponding database looks like this:
+![UML diagram](assets/blogging-platform.png) 
+
+
